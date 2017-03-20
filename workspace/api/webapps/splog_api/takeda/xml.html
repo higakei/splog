@@ -1,0 +1,99 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>splog api - 竹田フィルタ(XML)</title>
+<script type="text/javascript">
+<!--
+	function createXML(form) {
+		var xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
+		xml += "<documents>\n";
+		xml += createDocumentXML(form);
+		xml += "</documents>\n";
+		return xml;
+	}
+
+	function createDocumentXML(form) {
+		var xml = "\t<document>\n";
+		xml += "\t\t<documentId>" + escapeForXML(form.documentId.value) + "</documentId>\n";
+		xml += "\t\t<authorId>" + escapeForXML(form.authorId.value) + "</authorId>\n";
+		xml += "\t\t<url>" + escapeForXML(form.url.value) + "</url>\n";
+		xml += "\t\t<date>" + escapeForXML(form.date.value) + "</date>\n";
+		xml += "\t\t<title>" + escapeForXML(form.title.value) + "</title>\n";
+		xml += "\t\t<body>" + escapeForXML(form.body.value) + "</body>\n";
+		xml += "\t</document>\n";
+		return xml;
+	}
+
+	function setXML(input, output) {
+		var xml = createXML(input);
+		output.blogFeed.value = xml;
+		input.reset();
+	}
+
+	function addXML(input, output) {
+		var xml = output.blogFeed.value;
+		xml = xml.replace(/<\/documents>\r\n/, "");
+		xml += createDocumentXML(input);
+		xml += "</documents>\n";
+		output.blogFeed.value = xml;
+		input.reset();
+	}
+
+	function clearForm(form) {
+		form.reset();
+	}
+	
+	function setAction(form, action) {
+		form.action = action;
+	}
+
+	function escapeForXML(string) {
+		if (string == null) return null;
+		string = string.replace(/&/g, "&amp;");
+		string = string.replace(/</g, "&lt;");
+		string = string.replace(/>/g, "&gt;");
+		return string;
+	}
+// -->
+</script>
+</head>
+<body>
+	<div>XML作成フォーム</div>
+	<form>
+		<table>
+			<tr><th>documentId</th><td><input type="text" name="documentId" size="100" /></td></tr>
+			<tr><th>authorId</th><td><input name="authorId" /></td></tr>
+			<tr><th>url</th><td><input name="url" size="60" /></td></tr>
+			<tr><th>date</th><td><input type="text" name="date" /></td></tr>
+			<tr><th>title</th><td><input type="text" name="title" size="50" /></td></tr>
+			<tr><th>body</th><td><textarea name="body" cols="100" rows="5"></textarea></td></tr>
+			<tr>
+				<td colspan="2">
+					<input type="button" value="新規作成" onclick="setXML(this.form, document.send)" />
+					<input type="button" value="追加" onclick="addXML(this.form, document.send)" />
+					<input type="button" value="クリア" onclick="clearForm(this.form)" />
+				</td>
+			</tr>
+		</table>
+	</form>
+
+	<div>XML送信フォーム</div>
+	<form method="post" name="send">
+		<div><textarea name="blogFeed" cols="150" rows="20"></textarea></div>
+		<div>
+			<span><input type="submit" value="投稿者分析" onclick="setAction(this.form, './analyze/author')" /></span>
+			<span><input type="submit" value="文書分析" onclick="setAction(this.form, './analyze/document')"/></span>
+			<span><input type="button" value="クリア" onclick="clearForm(this.form)" /></span>
+		</div>
+	</form>
+
+	<div>XMLファイル送信フォーム</div>
+	<form method="post" enctype="multipart/form-data">
+		<div><input type="file" name="blogFeed" /></div>
+		<div>
+			<span><input type="submit" value="投稿者分析" onclick="setAction(this.form, './analyze/multipart/author')" /></span>
+			<span><input type="submit" value="文書分析" onclick="setAction(this.form, './analyze/multipart/document')"/></span>
+		</div>
+	</form>
+</body>
+</html>

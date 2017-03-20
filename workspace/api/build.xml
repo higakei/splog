@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     2006/08/09                                                        
+
+     project     「クチコミ＠係長」
+     description
+                 クチコミ＠係長のビルドスクリプト
+     asano                                                                
+     ====================================================================== -->
+     	
+<project name="splogfilter" 
+         default="deploy" 
+         basedir=".">
+
+    <property file="build.properties" />
+
+    <!-- ============================設定============================ -->
+   	<property name="app" value="splog_api" />
+   	<property name="jar.version" value="0.1" />
+	<property name="jar.name" value="fusion-${app}${jar.version}.jar" />
+
+    <!-- ソースファイルの格納ディレクトリ -->
+    <property name="src.dir" value="${basedir}/src/main/java" />
+	<!-- リソースファイルの格納ディレクトリ -->
+	<property name="resource.dir" value="${basedir}/src/main/resources" />
+
+    <!-- コンパイル済みクラスファイルの格納ディレクトリ -->
+    <property name="build.dir" value="${basedir}/dest/" />
+
+    <!-- jar作成用クラスファイルの格納ディレクトリ -->
+    <property name="dest.dir" value="${basedir}/dest/" />
+    
+    <!-- javadoc出力ディレクトリ -->
+    <property name="doc.dir" value="${basedir}/doc/javadoc" />
+
+    
+    <!-- jarデプロイ先 -->
+    <property name="ws_app" value="${basedir}/webapps/${app}" />
+    <property name="web-lib" value="${ws_app}/WEB-INF/lib" />
+
+
+    
+      
+    <!-- =============================タスク============================ -->
+    <!-- 設定内容を出力 -->
+    <target name="showconf">
+        <echo message="---- kuchikomi kakaricho build ----"/>
+    	<echo message="■ディレクトリ設定を確認"/>
+        <echo message="JAVA_HOME = ${java.home}"/>
+        <echo message="JRE version = ${java.version}"/>
+        <echo message="lib = ${web-lib}"/>
+    </target>
+    
+    <target name="cpruntimelib"  depends="showconf">
+    	<echo message="ライブラリを更新します。"/>
+        <!-- クラスパスの設定 -->
+	    <path id="classpath">
+	 	  <!-- Servlet APIのライブラリ -->
+		  <fileset dir="${catalina.lib}">
+			<include name="*.jar"/>
+			<exclude name="${jar.name}"/>
+		  </fileset>
+	      <!-- ライブラリ -->
+	      <fileset dir="${web-lib}">
+	        <include name="**/*.jar"/>
+	      </fileset>
+	    </path>
+    </target>
+    
+
+    <!-- ビルドツリーの削除 -->
+    <target name="clean" depends="cpruntimelib">
+    	<echo message="■ビルドツリーの削除"/>
+        <delete quiet="true">
+		    <fileset dir="${dest.dir}">
+                <include name="**/*.*"/>
+            </fileset>
+        </delete>
+    </target>
+
+
+    
+	
+    <!-- ディレクトリの生成 -->
+    <target name="mkDir" depends="clean">
+    	<echo message="■ディレクトリの作成"/>
+    	<mkdir dir="${dest.dir}"/>
+    </target>
+	
+
+    
+
+    <!-- ソースファイルのコンパイルとビルドツリーの作成 -->
+    <target name="compile" depends="mkDir">
+    	<echo message="■コンパイル"/>
+    	<mkdir dir="${ws_app}/WEB-INF/classes"/>
+        <javac debug="yes" fork="true"
+               srcdir="${src.dir}"
+               destdir="${ws_app}/WEB-INF/classes"
+        	encoding="UTF-8"
+               classpathref="classpath">
+            <include name="**/*.java"/>
+        </javac>
+    	<copy todir="${webapp}/WEB-INF/classes">
+    	    <fileset dir="${src.dir}" >
+                <exclude name="**/*.java"/>
+            </fileset>
+        	<!-- その他のリソースファイル -->       	
+            <fileset dir="${resource.dir}" >
+                <include name="*.*" />
+            </fileset>
+    	</copy>
+    </target>
+
+
+    
+    <!-- デプロイ -->
+    <target name="deploy" depends="compile">
+    	<echo message="■Tomcatのアプリケーションディレクトリにデプロイ"/>
+    	
+    	<echo message="クラスファイル以外のファイルのコピー"/>
+        <!-- クラスファイル以外のファイルのコピー -->
+    	<copy todir="${build.dir}">
+            <fileset dir="${src.dir}" >
+                <exclude name="**/*.java"/>
+            </fileset>
+        	<!-- その他のリソースファイル -->       	
+            <fileset dir="${resource.dir}" >
+                <include name="*.*" />               
+            </fileset>
+    	</copy>
+
+
+    	<!--web.xml-->
+    	<copy todir="${webapp}/WEB-INF" >
+            <fileset file="${ws_app}/WEB-INF/web.xml" />
+    	</copy>
+
+    	<echo message="クラスファイル以外のWEB-INF直下のリソースをコピー"/>
+        <!-- クラスファイル以外のWEB-INF直下ファイル -->
+        <copy todir="${webapp}/WEB-INF" >
+        	<!-- 共通設定ファイル -->       	
+            <fileset dir="${ws_app}/WEB-INF" >
+                <include name="**/*.*" />
+            	<exclude name="src/*.*"/>
+            </fileset>
+        </copy>
+
+    	<echo message="リソースファイルを公開ファイル領域にコピー"/>
+		<copy todir="${webapp}/WEB-INF/classes" >
+	        <fileset dir="${resource.dir}" >
+	            <include name="**/*.*" />
+	        </fileset>		
+      	</copy>
+      	
+      	<copy todir="${webapp}" >
+	        <fileset dir="${ws_app}" >
+	            <include name="*.html" />
+	        </fileset>		
+      	</copy>
+       
+    </target>
+    	
+	
+	
+	<target name="javadoc">
+		<echo message="■Javadocを作成します"/>
+    	<echo message="■ドキュメントの削除"/>
+        <delete dir="${doc.dir}/**/*.*" />
+    	<echo message="■ディレクトリの作成"/>
+    	<mkdir dir="${doc.dir}"/>
+    	<echo message="src.dir = ${src.dir}"/>
+    	<javadoc 
+    	 packagenames="jp.co.hottolink.*"
+    	 sourcepath="${src.dir}"
+    	 destdir="${doc.dir}"
+    	 encoding="utf-8" 
+    	 classpathref="classpath"
+    	 source="1.5"
+    	 charset="utf-8"/>
+	</target>
+   	
+   	
+   	
+</project>

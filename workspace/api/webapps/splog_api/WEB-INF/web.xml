@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+   version="2.5">
+
+  <display-name>splog api</display-name>
+
+  <filter>
+    <filter-name>Set Character Encoding</filter-name>
+    <filter-class>filters.SetCharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>Set Character Encoding</filter-name>
+    <url-pattern>/analyze/*</url-pattern>
+  </filter-mapping>
+
+  <servlet>
+    <servlet-name>InitServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.InitServlet</servlet-class>
+     <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>AuthorAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.takeda.AuthorAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>DocumentAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.takeda.DocumentAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>AuthorMultipartAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.takeda.AuthorMultipartAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>DocumentMultipartAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.takeda.DocumentMultipartAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>SentenceBayesAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.takeda.bayes.SentenceBayesAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>BlogHeaderBayesAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.takeda.bayes.BlogHeaderBayesAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>RssUrlAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.takeda.RssUrlAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>DocumentWaisetsuAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.santi.waisetsu.DocumentWaisetsuAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>ContentWaisetsuAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.santi.waisetsu.ContentWaisetsuAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>RssWaisetsuAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.santi.waisetsu.RssWaisetsuAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>DocumentSpeechBalanceAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.santi.pos.DocumentSpeechBalanceAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>ContentSpeechBalanceAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.santi.pos.ContentSpeechBalanceAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>RssSpeechBalanceAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.santi.pos.RssSpeechBalanceAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>DocumentNaiveBayesAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.santi.bayes.DocumentNaiveBayesAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>ContentNaiveBayesAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.santi.bayes.ContentNaiveBayesAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>RssNaiveBayesAnalyzeServlet</servlet-name>
+    <servlet-class>jp.co.hottolink.splogfilter.api.servlet.santi.bayes.RssNaiveBayesAnalyzeServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>AuthorAnalyzeServlet</servlet-name>
+    <url-pattern>/takeda/analyze/author</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>DocumentAnalyzeServlet</servlet-name>
+    <url-pattern>/takeda/analyze/document</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>AuthorMultipartAnalyzeServlet</servlet-name>
+    <url-pattern>/takeda/analyze/multipart/author</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>DocumentMultipartAnalyzeServlet</servlet-name>
+    <url-pattern>/takeda/analyze/multipart/document</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>SentenceBayesAnalyzeServlet</servlet-name>
+    <url-pattern>/analyze/bayes/sentence</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BlogHeaderBayesAnalyzeServlet</servlet-name>
+    <url-pattern>/analyze/bayes/blogheader</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>RssUrlAnalyzeServlet</servlet-name>
+    <url-pattern>/takeda/analyze/rss/url</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>DocumentWaisetsuAnalyzeServlet</servlet-name>
+    <url-pattern>/analyze/waisetsu/document</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ContentWaisetsuAnalyzeServlet</servlet-name>
+    <url-pattern>/analyze/waisetsu/content</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>RssWaisetsuAnalyzeServlet</servlet-name>
+    <url-pattern>/analyze/waisetsu/rss</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>DocumentSpeechBalanceAnalyzeServlet</servlet-name>
+    <url-pattern>/analyze/speech_balance/document</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ContentSpeechBalanceAnalyzeServlet</servlet-name>
+    <url-pattern>/analyze/speech_balance/content</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>RssSpeechBalanceAnalyzeServlet</servlet-name>
+    <url-pattern>/analyze/speech_balance/rss</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>DocumentNaiveBayesAnalyzeServlet</servlet-name>
+    <url-pattern>/analyze/santi_bayes/document</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ContentNaiveBayesAnalyzeServlet</servlet-name>
+    <url-pattern>/analyze/santi_bayes/content</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>RssNaiveBayesAnalyzeServlet</servlet-name>
+    <url-pattern>/analyze/santi_bayes/rss</url-pattern>
+  </servlet-mapping>
+</web-app>

@@ -1,0 +1,40 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>splog api - わいせつ語フィルタ</title>
+</head>
+<body>
+<p>1. タイトルと本文から分析</p>
+<form method="post" action="./analyze/waisetsu/document">
+	<div>タイトル：<input type="text" name="title" /></div>
+	<div>本文：</div>
+	<div><textarea name="body" cols="50" rows="5"></textarea></div>
+	<div>
+		<input type="checkbox" name="detail" value="show" />詳細表示
+		<input type="submit" value="判定" />
+		<input type="reset" value="クリア" />
+	</div>
+</form>
+
+<p>2. 文章から分析</p>
+<form method="post" action="./analyze/waisetsu/content">
+	<div><textarea name="content" cols="50" rows="5"></textarea></div>
+	<div>
+		<input type="checkbox" name="detail" value="show" />詳細表示
+		<input type="submit" value="判定" />
+		<input type="reset" value="クリア" />
+	</div>
+</form>
+
+<p>3. RSSから分析</p>
+<form method="post" action="./analyze/waisetsu/rss">
+	<div>URL：<input type="text" name="url" /></div>
+	<div>
+		<input type="checkbox" name="detail" value="show" />詳細表示
+		<input type="submit" value="判定" />
+		<input type="reset" value="クリア" />
+	</div>
+</form>
+
+</body>
+</html>

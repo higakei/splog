@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/jasper.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/jsp-api.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/el-api.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/annotations-api.jar"/>
+	<classpathentry kind="lib" path="webapps/splog_learning/WEB-INF/lib/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="webapps/splog_learning/WEB-INF/lib/fusion-utils1.0.jar"/>
+	<classpathentry kind="lib" path="webapps/splog_learning/WEB-INF/lib/jstl.jar"/>
+	<classpathentry kind="lib" path="webapps/splog_learning/WEB-INF/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="webapps/splog_learning/WEB-INF/lib/splog-engine1.0.jar"/>
+	<classpathentry kind="lib" path="webapps/splog_learning/WEB-INF/lib/standard.jar"/>
+	<classpathentry kind="src" output="work" path="work"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="src" path="src/test/resources"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="lib" path="webapps/splog_learning/WEB-INF/lib/velocity-1.6.2-dep.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/mysql-connector-java-5.1.6-bin.jar"/>
+	<classpathentry kind="output" path="webapps/splog_learning/WEB-INF/classes"/>
+</classpath>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>splog learning - 訓練</title>
+<script type="text/javascript">
+<!--
+function up(select) {
+
+	var index = select.selectedIndex;
+	if (index == -1) {
+		return false;
+	}
+
+	if (index <= 0) {
+		return false;
+	}
+
+	var value = select.options[index - 1].value;
+	var text = select.options[index - 1].text;
+	var current = select.options[index];
+
+	select.options[index - 1].value = current.value;
+	select.options[index - 1].text = current.text;
+	select.selectedIndex = index - 1;
+	select.options[index].value = value;
+	select.options[index].text = text;
+}
+
+function down(select) {
+
+	var index = select.selectedIndex;
+	if (index == -1) {
+		return false;
+	}
+
+	var maxIndex = select.options.length - 1;
+	if (index >= maxIndex) {
+		return false;
+	}
+
+	var value = select.options[index + 1].value;
+	var text = select.options[index + 1].text;
+	var current = select.options[index];
+
+	select.options[index + 1].value = current.value;
+	select.options[index + 1].text = current.text;
+	select.selectedIndex = index + 1;
+	select.options[index].value = value;
+	select.options[index].text = text;
+}
+
+function selectAll(select) {
+	for (i = 0; i < select.options.length; i++) {
+		select.options[i].selected = true;
+	}
+}
+
+function setCookie() {
+	var time = new Date().getTime();
+	var training = "training=" + escape(time);
+	document.cookie = training;
+}
+// -->
+</script>
+</head>
+<body>
+<h1>訓練</h1>
+<h3>学習機械を訓練します。</h3>
+<form method="post" action="/splog_learning/action/training" onsubmit="selectAll(this.classifier); setCookie();">
+	<table>
+		<tr>
+			<th colspan="2">トライアル情報</th>
+		</tr>
+		<tr>
+			<th>データタイプ</th>
+			<td>ブログ</td>
+		</tr>
+		<tr>
+			<th>判別タイプ</th>
+			<td>スパム判定</td>
+		</tr>
+		<tr>
+			<td colspan="2"><font color="red" size="2px;">訓練する順に判別器を並べ替えてください。</font></td>
+		</tr>
+		<tr>
+			<th>判別器</th>
+			<td>
+				<select name="classifier" multiple="multiple">
+					<option value="content">コンテンツフィルタ</option>
+					<option value="waisetsu">わいせつ語フィルタ</option>
+					<option value="speech_balance">品詞バランスフィルタ</option>
+					<option value="naive_bayes">NaiveBayesフィルタ</option>
+				</select>
+				<div>
+					<input type="button" value="↑" onclick="up(this.form.classifier);" />
+					<input type="button" value="↓" onclick="down(this.form.classifier);"/>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="submit" value="訓練" />
+			</td>
+		</tr>
+	</table>
+</form>
+<br />
+<div>
+	<a href="javascript:history.back();">戻る</a>
+	<a href="/splog_learning">トップ</a>
+</div>
+</body>
+</html>

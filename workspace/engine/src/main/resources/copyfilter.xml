@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>コピーフィルター設定ファイル</comment>
+	<!-- 最大文書数 -->
+	<entry key="MAX_DOCUMENT_NUMBER">600000</entry>
+	<!-- 最大接尾辞インデックス数 -->
+	<entry key="MAX_SUFFIX_INDEX_NUMBER">3500000</entry>
+	<!--entry key="MAX_SUFFIX_INDEX_NUMBER">5000000</entry--><!-- -Xmx2G -->
+	<!--entry key="MAX_SUFFIX_INDEX_NUMBER">10000000</entry--><!-- -Xmx3G -->
+	<!--entry key="MAX_SUFFIX_INDEX_NUMBER">20000000</entry--><!-- -Xmx4G -->
+	<entry key="SUFFIX_HASHCODE_LENGTH">2</entry>
+</properties>

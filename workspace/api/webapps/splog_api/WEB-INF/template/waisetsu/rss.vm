@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results>
+#foreach($result in $results)
+  #if($result.get("cause"))
+	<result link="$!{escape.xml($result.get("item").link)}" error="$!{escape.xml($result.get("cause"))}" />
+  #else
+	<result link="$!{escape.xml($result.get("item").link)}" judge="$!{escape.xml($result.get("judge"))}">
+	#if($showDetail)
+    	<words>$!{escape.xml($result.get("words"))}</words>
+    	<title>$!{escape.xml($result.get("item").title)}</title>
+		<description>$!{escape.xml($result.get("item").description)}</description>
+	#end
+	</result>
+  #end
+#end
+</results>

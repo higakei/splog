@@ -1,0 +1,8 @@
+<Context path="/splog_learning" reloadable="true" docBase="splog_learning.war">
+    <Resource name="jdbc/splog_learning" auth="Container" type="javax.sql.DataSource"
+               maxActive="50" maxIdle="15" maxWait="10000"
+               username="splogdev" password="splog" driverClassName="com.mysql.jdbc.Driver"
+               removeAbandoned="true" removeAbandonedTimeout="60" logAbandoned="true"
+               testOnBorrow="true" validationQuery="SELECT 1"
+               url="jdbc:mysql://localhost:3306/splog_learning?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull" />
+</Context>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="bayes">
+   <xs:complexType>
+      <xs:sequence>
+         <xs:element ref="splog" />
+         <xs:element ref="blog" />
+      </xs:sequence>
+   </xs:complexType>
+</xs:element>
+
+<xs:element name="splog">
+   <xs:complexType>
+      <xs:sequence>
+         <xs:element name="prior" type="xs:string" />
+         <xs:element ref="likelihoods" />
+      </xs:sequence>
+   </xs:complexType>
+</xs:element>
+
+<xs:element name="blog">
+   <xs:complexType>
+      <xs:sequence>
+         <xs:element name="prior" type="xs:string" />
+         <xs:element ref="likelihoods" />
+      </xs:sequence>
+   </xs:complexType>
+</xs:element>
+
+<xs:element name="likelihoods">
+   <xs:complexType>
+      <xs:sequence>
+         <xs:element ref="likelihood" maxOccurs="unbounded" />
+      </xs:sequence>
+   </xs:complexType>
+</xs:element>
+
+<xs:element name="likelihood">
+   <xs:complexType>
+      <xs:sequence>
+         <xs:element name="word" type="xs:string" />
+         <xs:element name="probability" type="xs:string" />
+      </xs:sequence>
+   </xs:complexType>
+</xs:element>
+
+</xs:schema>

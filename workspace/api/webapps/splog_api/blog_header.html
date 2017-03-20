@@ -1,0 +1,33 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>splog api - ブログヘッダフィルタ</title>
+</head>
+<body>
+<div>1. テキストから分析</div>
+<form method="post" action="/splog_api/analyze/bayes/sentence">
+	<div><textarea name="sentence" cols="50" rows="10"></textarea></div>
+	<div>
+		<span><input type="checkbox" name="detail" value="show" /></span>
+		<span>詳細表示</span>
+		<span><input type="submit" value="分析" /></span>
+		<span><input type="reset" value="クリア" /></span>
+	</div>
+</form>
+<br />
+
+<div>2. XMLから分析（<a href="sample/blog_header.xml" target="_blank">※サンプル</a>）</div>
+<form method="post" action="/splog_api/analyze/bayes/blogheader" enctype="multipart/form-data">
+	<div>
+		<span>XMLファイル</span>
+		<span><input type="file" name="blogHeader" /></span>
+	</div>
+	<div>
+		<span><input type="checkbox" name="detail" value="show" /></span>
+		<span>詳細表示</span>
+		<span><input type="submit" value="分析" /></span>
+		<span><input type="reset" value="クリア" /></span>
+	</div>
+</form>
+</body>
+</html>

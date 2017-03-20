@@ -1,0 +1,23 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>splog api - 竹田フィルタ(RSS)</title>
+</head>
+<body>
+<p>RSSフィードURLのスパム判定フォーム</p>
+<form method="post" action="./analyze/rss/url">
+	<div>
+		スパム判定するブログのRSSフィードURLを入力してください</div>
+	<div>URL<input type="text" name="url" /></div>
+	<div>
+		<input type="radio" name="type" value="0" />色々なブロガー
+		<input type="radio" name="type" value="1" />全て同じブロガー
+	</div>
+	<div><input type="checkbox" name="detail" value="show" />詳細表示</div>
+	<div>
+		<input type="submit" value="判定" />
+		<input type="reset" value="クリア" />
+	</div>
+</form>
+</body>
+</html>

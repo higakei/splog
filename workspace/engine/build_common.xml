@@ -1,0 +1,78 @@
+<project name="SplogFilter" default="clean" basedir=".">
+
+   	<property name="jar.version" value="0.1" />
+	<property name="jar.name" value="splog-common${jar.version}.jar" />
+
+    <!-- ソースファイルの格納ディレクトリ -->
+    <property name="src" value="${basedir}/src/main/java/jp/co/hottolink/splogfilter/common" />
+	<!-- リソースファイルの格納ディレクトリ -->
+	<property name="resource" value="${basedir}/src/main/resources" />
+	<!-- ライブラリの格納ディレクトリ -->
+    <property name="lib" value="${basedir}/lib" />
+    <!-- コンパイル済みクラスファイルの格納ディレクトリ -->
+    <property name="build" value="${basedir}/build/" />
+    <!-- リリースディレクトリ -->
+    <property name="release" value="${basedir}/release/" />
+    <!-- javadocディレクトリ -->
+    <property name="javadoc" value="${basedir}/javadoc/" />
+
+	
+	<path id="classpath">
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="prepare">
+		<tstamp />
+		<delete dir="${release}" />
+		<mkdir dir="${release}" />
+	</target>
+
+	<target name="compile" depends="prepare">
+		<mkdir dir="${build}" />
+		<javac srcdir="${src}" destdir="${build}" encoding="UTF-8" deprecation="yes" debug="true">
+			<classpath>
+				<path refid="classpath" />
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar destfile="${release}/${jar.name}" basedir="${build}" />
+	</target>
+
+	<target name="copy" depends="jar">
+		<copy todir="${release}" flatten="true">
+			<fileset dir="${lib}" includes="mysql-connector-java-5.1.6-bin.jar" />
+			<fileset dir="${lib}" includes="sen.jar" />
+			<fileset dir="${resource}" includes="buzz_api.properties" />
+		</copy>
+		<copy todir="${release}/sen">
+			<fileset dir="${basedir}/sen" />
+		</copy>
+	</target>
+
+	<target name="clean" depends="copy">
+		<delete dir="${build}" />
+	</target>
+	
+	<target name="javadoc">
+		<echo message="■Javadocを作成します"/>
+    	<echo message="■ドキュメントの削除"/>
+        <delete dir="${javadoc}/**/*.*" />
+    	<echo message="■ディレクトリの作成"/>
+    	<mkdir dir="${javadoc}"/>
+    	<echo message="src.dir = ${src}"/>
+    	<javadoc 
+    	 packagenames="jp.co.hottolink.*"
+    	 sourcepath="${src}"
+    	 destdir="${javadoc}"
+    	 encoding="utf-8" 
+    	 classpathref="classpath"
+    	 source="1.6"
+    	 charset="utf-8"/>
+	</target>
+
+</project>
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+    <learner>
+	#foreach($classifier in $result.learner)
+		<$!{escape.xml($classifier.name)} reliability="$!{escape.xml($classifier.reliability)}">$!{escape.xml($classifier.label)}</$!{escape.xml($classifier.name)}>
+	#end
+	</learner>
+    <results>
+    #foreach($classified in $result.classifieds)
+		#if($classified.correct)
+		<data id="$!{escape.xml($classified.id)}" correct="$!{escape.xml($classified.correct)}">
+		#else
+    	<data id="$!{escape.xml($classified.id)}">
+    	#end
+    		<answer>$!{escape.xml($classified.answer)}</answer>
+    	##if($showDetail)
+    		#foreach($classifier in $classified.answer.detail.keySet())
+    		<$!{escape.xml($classifier)}>$!{escape.xml($classified.answer.detail.get($classifier))}</$!{escape.xml($classifier)}>
+    		#end
+    	##end
+        </data>
+    #end
+    </results>
+</result>

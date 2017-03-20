@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomcatProjectProperties>
+    <rootDir>/webapps/splog_api</rootDir>
+    <exportSource>false</exportSource>
+    <reloadable>true</reloadable>
+    <redirectLogger>false</redirectLogger>
+    <updateXml>true</updateXml>
+    <warLocation>C:\Users\higa\Documents\splog\splog_api.war</warLocation>
+    <extraInfo></extraInfo>
+    <webPath>/splog_api</webPath>
+</tomcatProjectProperties>

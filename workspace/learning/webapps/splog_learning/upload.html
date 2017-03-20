@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>splog learning - データアップロード</title>
+</head>
+<body>
+<h1>データアップロード</h1>
+<h3>学習データをDBにアップロードします。</h3>
+<pre><font color="red">※学習データはCSVファイルのみに対応しています。</font></pre>
+<form method="post" enctype="multipart/form-data" action="/splog_learning/action/upload">
+	<table>
+		<tr>
+			<th>学習データ</th>
+			<td><input type="file" name="data" /></td>
+		</tr>
+		<tr>
+			<th>ヘッダー</th>
+			<td>
+				有<input type="radio" name="header" value="included" checked />
+				無<input type="radio" name="header" value="excluded" disabled />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="submit" value="アップロード" />
+				<input type="reset" value="クリア" />
+			</td>
+		</tr>
+	</table>
+</form>
+<div>
+	<a href="javascript:history.back();">戻る</a>
+	<a href="/splog_learning">トップ</a>
+</div></body>
+</html>
